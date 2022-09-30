@@ -71,7 +71,12 @@ exports.createTour = async (req, res) => {
         tour: newTour,
       },
     });
-  } catch (err) {}
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      errmsg: `${err.message}`,
+    });
+  }
 };
 
 exports.updateTour = async (req, res) => {
