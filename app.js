@@ -24,7 +24,7 @@ app.use('/api/v1/users', userRouter);
 
 // Send an error msg if no route
 app.all('*', (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`), 404);
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
 app.use(globalErrorHandler);
