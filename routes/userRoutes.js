@@ -19,6 +19,7 @@ router.patch('/resetPassword/:token', resetPassword);
 
 router.patch('/updateMyPassword', protect, updatePassword);
 router.patch('/updateMe', protect, userController.updateMe);
+router.delete('/deleteMe', protect, userController.deleteMe);
 
 router.route('/').get(userController.getAllUsers);
 // .post(userController.createUser);
