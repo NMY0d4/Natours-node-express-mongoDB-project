@@ -93,7 +93,7 @@ const tourSchema = new mongoose.Schema(
         default: 'Point',
         enum: ['Point'],
       },
-      coordinates: [Number],
+      coordinates: [Number], // inversé par rapport à la normal (longitude et après latitude)
       address: String,
       description: String,
     },
@@ -117,8 +117,7 @@ const tourSchema = new mongoose.Schema(
       },
     ],
   },
-  { toJSON: { virtuals: true } },
-  { toObject: { virtuals: true } }
+  { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
 tourSchema.virtual('durationWeeks').get(function () {
