@@ -29,7 +29,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
     return next(
       new AppError(
-        'This oute is not for password updates. Please use /updateMyPassword',
+        'This out is not for password updates. Please use /updateMyPassword',
         400
       )
     );
@@ -71,13 +71,6 @@ exports.createUser = (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'this route is not yet defined!',
-  });
-};
-
-exports.deleteUser = (req, res) => {
   res.status(500).json({
     status: 'error',
     message: 'this route is not yet defined!',
