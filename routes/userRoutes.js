@@ -7,24 +7,34 @@ const {
   resetPassword,
   updatePassword,
   protect,
+  restrictTo,
   // restrictTo,
 } = require('../controllers/authController');
 
 const router = express.Router();
 
-router.patch('/updateMyPassword', protect, updatePassword);
 router.post('/signup', signup);
 router.post('/login', login);
 
 router.post('/forgotPassword', forgotPassword);
 router.patch('/resetPassword/:token', resetPassword);
 
-router.get('/me', protect, userController.getMe, userController.getUser);
-router.patch('/updateMe', protect, userController.updateMe);
-router.delete('/deleteMe', protect, userController.deleteMe);
+// all the following routes must be protected --------------------------------
+router.use(protect);
 
-router.route('/').get(userController.getAllUsers);
-// .post(userController.createUser);
+router.patch('/updateMyPassword', updatePassword);
+
+router.get('/me', userController.getMe, userController.getUser);
+
+router.patch('/updateMe', userController.updateMe);
+router.delete('/deleteMe', userController.deleteMe);
+
+// all the following routes can only be accessed by an admin user.------------
+router.use(restrictTo('admin'));
+router
+  .route('/')
+  .get(userController.getAllUsers)
+  .post(userController.createUser);
 router
   .route('/:id')
   .get(userController.getUser)
