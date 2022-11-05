@@ -140,10 +140,10 @@ tourSchema.virtual('reviews', {
 // DOCUMENT Middleware: runs before .save() .create()
 
 // Embeding users in tours but not the right solution
-// tourSchema.pre('save', function (next) {
-//   this.slug = slugify(this.name, { lower: true });
-//   next();
-// });
+tourSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
+});
 
 // tourSchema.pre('save', async function (next) {
 //   const guidesPromises = this.guides.map(async (id) => await User.findById(id));
