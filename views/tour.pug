@@ -2,7 +2,7 @@ extends base
 include _reviewCard
 
 block append head 
-    script(src="/js/mapbox.js" defer)    
+    //- script(src="/js/mapbox.js" defer)    
     script(src='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js') 
     link(href='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet')
 
@@ -46,8 +46,7 @@ block content
                     +overviewBox('Next date', date, 'calendar')
                     +overviewBox('Difficulty', tour.difficulty, 'trending-up')
                     +overviewBox('Participants', `${tour.maxGroupSize} people`, 'user')
-                    +overviewBox('Rating', `${tour.ratingsAverage} / 5`, 'start')
-                   
+                    +overviewBox('Rating', `${tour.ratingsAverage} / 5`, 'start')                   
                    
                 .overview-box__group
                     h2.heading-secondary.ma-bt-lg Your tour guides
@@ -81,9 +80,7 @@ block content
     section.section-reviews
         .reviews
             each review in tour.reviews    
-                +reviewCard(review)
-
-                
+                +reviewCard(review)                
 
     section.section-cta
         .cta
