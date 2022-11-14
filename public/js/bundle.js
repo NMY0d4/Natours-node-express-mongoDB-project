@@ -11959,7 +11959,7 @@ exports.showAlert = exports.hideAlert = void 0;
 
 var hideAlert = function hideAlert() {
   var el = document.querySelector('.alert');
-  if (el) el.parentElement.removeChild(el);
+  if (el) el.remove();
 };
 
 // type is 'success or 'error"
