@@ -91,6 +91,3 @@ lerna-debug.log
 # System Files
 .DS_Store
 Thumbs.db
-
-# Public img
-/public/img
