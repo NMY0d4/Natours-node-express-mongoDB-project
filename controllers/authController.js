@@ -45,7 +45,11 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
     passwordChangedAt: req.body.passwordChangedAt,
   });
-  const url = `${req.protocol}://${req.get('host')}/me`;
+  const url = `${req.protocol}://${
+    req.get('host') === `127.0.0.1:${process.env.PORT}`
+      ? `localhost:3000`
+      : req.get('host')
+  }/me`;
   await new Email(newUser, url).sendWelcome();
 
   createSendToken(newUser, 201, res);
@@ -173,10 +177,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   // 3) Send it to user's email
-  console.log(req.get('host') === '127.0.0.1:3000' && `localhost:3000`);
   try {
     const resetURL = `${req.protocol}://${
-      req.get('host') === '127.0.0.1:3000' ? `localhost:3000` : req.get('host')
+      req.get('host') === `127.0.0.1:${process.env.PORT}`
+        ? `localhost:3000`
+        : req.get('host')
     }/api/v1/users/resetPassword/${resetToken}`;
 
     await new Email(user, resetURL).sendPasswordReset();
