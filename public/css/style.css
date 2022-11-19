@@ -88,7 +88,7 @@ body {
 
 .alert {
   position: fixed;
-  top: 0;
+  top: 15%;
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
@@ -1221,7 +1221,7 @@ body {
   margin: 0 auto;
 }
 
-.login-form {
+.auth-form {
   margin: 0 auto;
   max-width: 55rem;
   background-color: #fff;

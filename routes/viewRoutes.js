@@ -4,6 +4,7 @@ const {
   getOverview,
   getTour,
   getLoginForm,
+  getSignupForm,
   getAccount,
   getMyTours,
   // updateUserData,
@@ -19,7 +20,8 @@ router.get(
   getOverview
 );
 router.get('/tour/:slug', authController.isLoggedIn, getTour);
-router.get('/login', authController.isLoggedIn, getLoginForm);
+router.get('/login', getLoginForm);
+router.get('/signup', getSignupForm);
 router.get('/me', authController.protect, getAccount);
 router.get('/my-tours', authController.protect, getMyTours);
 // router.post('/submit-user-data', authController.protect, updateUserData);

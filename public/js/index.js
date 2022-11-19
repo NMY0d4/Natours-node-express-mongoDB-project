@@ -4,10 +4,12 @@ import { displayMap } from './mapbox';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
+import { signup } from './signup';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
 const loginForm = document.querySelector('.form--login');
+const signupForm = document.querySelector('.form--signup');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const updateUserForm = document.querySelector('.form-user-data');
 const updatePasswordForm = document.querySelector('.form-user-settings');
@@ -28,6 +30,19 @@ if (loginForm)
     login(email, password);
   });
 
+if (signupForm)
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('passwordConfirm').value;
+
+    signup(name, email, password, passwordConfirm);
+  });
+
 if (logOutBtn) {
   logOutBtn.addEventListener('click', logout);
 }
@@ -39,7 +54,6 @@ if (updateUserForm || updatePasswordForm) {
     form.append('name', document.getElementById('name').value);
     form.append('email', document.getElementById('email').value);
     form.append('photo', document.getElementById('photo').files[0]);
-    console.log(form);
 
     await updateSettings(form, 'user');
   });
