@@ -5,6 +5,7 @@ const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Email = require('../utils/email');
+const getHostForUrl = require('../utils/gethostUrl');
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -45,11 +46,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
     passwordChangedAt: req.body.passwordChangedAt,
   });
-  const url = `${req.protocol}://${
-    req.get('host') === `127.0.0.1:${process.env.PORT}`
-      ? `localhost:3000`
-      : req.get('host')
-  }/me`;
+  const url = `${req.protocol}://${getHostForUrl()}/me`;
   await new Email(newUser, url).sendWelcome();
 
   createSendToken(newUser, 201, res);
@@ -75,7 +72,7 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.logout = (req, res) => {
-  res.cookie('jwt', 'loggedout', {
+  res.cookie('jwt', 'logged Out', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
   });
@@ -178,11 +175,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   // 3) Send it to user's email
   try {
-    const resetURL = `${req.protocol}://${
-      req.get('host') === `127.0.0.1:${process.env.PORT}`
-        ? `localhost:3000`
-        : req.get('host')
-    }/api/v1/users/resetPassword/${resetToken}`;
+    const resetURL = `${req.protocol}://${getHostForUrl(
+      req
+    )}/api/v1/users/resetPassword/${resetToken}`;
 
     await new Email(user, resetURL).sendPasswordReset();
 
