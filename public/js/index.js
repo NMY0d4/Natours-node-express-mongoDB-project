@@ -33,7 +33,6 @@ if (loginForm)
 if (signupForm)
   signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const data = new FormData();
 
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
