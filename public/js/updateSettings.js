@@ -13,7 +13,7 @@ export const updateSettings = async (data, type) => {
 
     const res = await axios({
       method: 'PATCH',
-      url: `http://localhost:3000/${url}`,
+      url,
       data,
     });
     if (res.data.status === 'success') {
