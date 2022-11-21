@@ -94,3 +94,5 @@ Thumbs.db
 
 # parcel build
 .cache/
+
+.eslintrc.json
