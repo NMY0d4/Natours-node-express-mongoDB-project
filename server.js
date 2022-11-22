@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-dotenv.config();
 
 process.on('uncaughtException', (err) => {
   console.log('UNCAUGHT REJECTION! 💥 shutting down...');
@@ -8,6 +7,8 @@ process.on('uncaughtException', (err) => {
 
   process.exit(1);
 });
+
+dotenv.config();
 
 const app = require('./app');
 
@@ -31,7 +32,6 @@ mongoose
 const port = (process.env.NODE_ENV = 'production' ? process.env.PORT : 8000);
 
 const server = app.listen(port, () => {
-  console.log('ici DB', DB);
   console.log(`app running on port ${port}...`);
 });
 
