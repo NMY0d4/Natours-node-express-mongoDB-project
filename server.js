@@ -30,7 +30,7 @@ mongoose
 const port = (process.env.NODE_ENV = 'production' ? process.env.PORT : 8000);
 
 const server = app.listen(port, () => {
-  console.log(DB);
+  console.log('ici DB', DB);
   console.log(`app running on port ${port}...`);
 });
 
