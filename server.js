@@ -20,9 +20,7 @@ const MONGODB_URI = process.env.DATABASE.replace(
 mongoose
   .connect(MONGODB_URI, {
     useNewUrlParser: true,
-    useCreateIndex: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
   })
   .then(() => {
     console.log('DB connection successfull!');
